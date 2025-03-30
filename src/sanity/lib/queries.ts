@@ -134,6 +134,8 @@ export async function getSite() {
 
 	if (!site) throw new Error(errors.missingSiteSettings)
 
+	console.log(site)
+
 	return site
 }
 

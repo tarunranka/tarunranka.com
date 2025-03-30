@@ -17,20 +17,7 @@ export default function PostPreview({
 
 	return (
 		<div className="group relative isolate flex h-full flex-col space-y-2">
-			<figure className="bg-ink/3 relative aspect-video overflow-hidden">
-				<Img
-					className="aspect-video w-full object-cover transition-all group-hover:scale-105 group-hover:brightness-110"
-					image={post?.metadata.image}
-					width={700}
-					alt={post?.metadata.title}
-				/>
 
-				{post?.featured && (
-					<span className="action absolute top-0 right-4 rounded-t-none py-1 text-xs shadow-md">
-						Featured
-					</span>
-				)}
-			</figure>
 
 			<div className={cn('h4', skeleton && 'skeleton-2')}>
 				<Link
