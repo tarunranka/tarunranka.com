@@ -17,6 +17,7 @@ export default async function RootLayout({
 }) {
 	return (
 		<Root>
+			<meta name="google-site-verification" content="3Ab6wVk9p6R8WTtOJY5vdjN9n2y-lGHcSQqd3hOkPEc" />
 			{/* <GoogleTagManager gtmId="" /> */}
 			<body className="bg-canvas text-ink">
 				<NuqsAdapter>
