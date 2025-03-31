@@ -1,4 +1,4 @@
-// import { GoogleTagManager } from '@next/third-parties/google'
+import { GoogleTagManager } from '@next/third-parties/google'
 import Root from '@/ui/Root'
 import { NuqsAdapter } from 'nuqs/adapters/next/app'
 import SkipToContent from '@/ui/SkipToContent'
@@ -18,7 +18,9 @@ export default async function RootLayout({
 	return (
 		<Root>
 			<meta name="google-site-verification" content="3Ab6wVk9p6R8WTtOJY5vdjN9n2y-lGHcSQqd3hOkPEc" />
-			{/* <GoogleTagManager gtmId="" /> */}
+
+
+			<GoogleTagManager gtmId="GTM-WQNQ96N7" />
 			<body className="bg-canvas text-ink">
 				<NuqsAdapter>
 					<SkipToContent />
