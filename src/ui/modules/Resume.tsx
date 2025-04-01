@@ -3,10 +3,7 @@ import { PortableText } from 'next-sanity'
 
 
 export default function Resume(
-	resume: Sanity.Resume & {
-		// Add any additional props you need here
-		resume?: Sanity.Resume
-	},
+	resume: Partial<Sanity.Resume> | undefined,
 ) {
 	console.log('[DEBUG] Resume component:', resume);
 	if (!resume) return null
