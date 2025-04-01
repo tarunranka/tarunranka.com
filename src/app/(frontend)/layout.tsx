@@ -18,7 +18,7 @@ export default async function RootLayout({
 	return (
 		<Root>
 			<meta name="google-site-verification" content="3Ab6wVk9p6R8WTtOJY5vdjN9n2y-lGHcSQqd3hOkPEc" />
-
+			<meta name="msvalidate.01" content="8B0F5423BCEF249A95CE1CEF1C44F577" />
 
 			<GoogleTagManager gtmId="GTM-WQNQ96N7" />
 			<body className="bg-canvas text-ink">
