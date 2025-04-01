@@ -3,7 +3,7 @@ import { PortableText } from 'next-sanity'
 
 
 export default function Resume(
-	resume: Partial<Sanity.Resume> | undefined,
+	resume: Partial<Sanity.Resume>,
 ) {
 	console.log('[DEBUG] Resume component:', resume);
 	if (!resume) return null
@@ -23,21 +23,21 @@ export default function Resume(
 				</header>
 
 				{/* Overview */}
-				{resume.overview?.length > 0 && (
+				{(resume?.overview ?? []).length > 0 && (
 					<section className="mb-12">
 						<h2 className="text-xl font-semibold text-gray-900 mb-2">Overview</h2>
 						<div className="space-y-2">
-							<PortableText value={resume.overview} />
+							<PortableText value={resume.overview ?? []} />
 						</div>
 					</section>
 				)}
 
 				{/* Experience Timeline */}
-				{resume.experience?.length > 0 && (
+				{(resume.experience ?? []).length > 0 && (
 					<section className="mb-12">
 						<h2 className="text-xl font-semibold text-gray-900 mb-6">Experience</h2>
 						<div className="border-l-4 border-gray-700">
-							{resume.experience.map((job, i) => (
+							{(resume.experience ?? []).map((job, i) => (
 								<div key={i} className="relative">
 									{/* Timeline Marker */}
 									<div className="absolute -left-3 w-5 h-5 bg-white border-4 border-gray-700 rounded-full"></div>
@@ -66,11 +66,11 @@ export default function Resume(
 				)}
 
 				{/* Education */}
-				{resume.education?.length > 0 && (
+				{(resume.education ?? []).length > 0 && (
 					<section className="mb-12">
 						<h2 className="text-xl font-semibold text-gray-900 mb-4">Education</h2>
 						<div className="space-y-8">
-							{resume.education.map((edu, i) => (
+							{(resume.education ?? []).map((edu, i) => (
 								<div key={i}>
 									<h3 className="font-semibold text-gray-800 text-lg">{edu.institution}</h3>
 									<p className="text-sm italic text-gray-500">
