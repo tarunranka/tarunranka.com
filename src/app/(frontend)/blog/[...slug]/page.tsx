@@ -45,10 +45,9 @@ async function getPost(params: Params) {
 			${lang ? `&& language == '${lang}'` : ''}
 		][0]{
 			...,
-			body[]{
-				...,
-				_type == 'image' => { asset-> }
-			},
+			body[defined(_type) && _type != null][]{
+  ...
+},
 			'readTime': length(string::split(pt::text(body), ' ')) / 200,
 			'headings': body[style in ['h2', 'h3']]{
 				style,

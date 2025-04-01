@@ -232,35 +232,6 @@ declare global {
 				uid?: string
 			}
 		}
-
-		interface ModuleResume extends Module<'resume'>, Resume {}
-
-		// extend Module union type for better intellisense
-		type Module =
-			| ModuleResume
-			| CustomHTML
-			| Module<'hero'>
-			| Module<'hero.split'>
-			| Module<'hero.saas'>
-			| Module<'card-list'>
-			| Module<'accordion-list'>
-			| Module<'blog-list'>
-			| Module<'blog-frontpage'>
-			| Module<'blog-post-content'>
-			| Module<'breadcrumbs'>
-			| Module<'callout'>
-			| Module<'flag-list'>
-			| Module<'logo-list'>
-			| Module<'person-list'>
-			| Module<'pricing-list'>
-			| Module<'richtext-module'>
-			| Module<'schedule-module'>
-			| Module<'search-module'>
-			| Module<'stat-list'>
-			| Module<'step-list'>
-			| Module<'tabbed-content'>
-			| Module<'testimonial-list'>
-			| Module<'testimonial.featured'>
 	}
 }
 

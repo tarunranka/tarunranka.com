@@ -74,15 +74,6 @@ export default function Modules({
 		}
 	}
 
-	console.log('Modules', modules);
-	console.log('Page', page);
-	console.log('Post', post);
-	console.log('Module Map', MODULE_MAP);
-	console.log('Additional Props', getAdditionalProps);
-	console.log('Module Type', modules?.map((module) => module._type));
-	console.log('Module Key', modules?.map((module) => module._key));
-	console.log('Module', modules);
-
 	return (
 		<>
 
