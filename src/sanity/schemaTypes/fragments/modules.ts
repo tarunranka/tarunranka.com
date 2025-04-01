@@ -29,6 +29,7 @@ export default defineField({
 		{ type: 'tabbed-content' },
 		{ type: 'testimonial-list' },
 		{ type: 'testimonial.featured' },
+		{ type: 'resume' },
 	],
 	options: {
 		insertMenu: {
@@ -64,6 +65,10 @@ export default defineField({
 				{
 					name: 'testimonials',
 					of: ['testimonial-list', 'testimonial.featured'],
+				},
+				{
+					name: 'resume',
+					of: ['resume'],
 				},
 			],
 		},

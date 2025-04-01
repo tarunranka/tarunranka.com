@@ -1,5 +1,6 @@
 import type { SanityImageObject } from '@sanity/image-url/lib/types/types'
 import type { SanityAssetDocument, SanityDocument } from 'next-sanity'
+import { PortableTextBlock } from '@portabletext/types'
 
 declare global {
 	namespace Sanity {
@@ -125,6 +126,31 @@ declare global {
 			}
 		}
 
+		interface Resume {
+			name: string
+			email: string
+			overview: PortableTextBlock[]
+
+			experience: {
+				role: string
+				company: string
+				duration: string
+				technologies: string
+				responsibilities: PortableTextBlock[]
+			}[]
+
+			education: {
+				institution: string
+				degree: string
+				duration: string
+				details: PortableTextBlock[]
+			}[]
+
+			technologies: string[]
+			databases: string[]
+			tooling: string[]
+		}
+
 		// objects
 
 		interface Code {
@@ -196,6 +222,8 @@ declare global {
 			noIndex: boolean
 		}
 
+		// modules
+
 		interface Module<T = string> {
 			_type: T
 			_key: string
@@ -204,6 +232,35 @@ declare global {
 				uid?: string
 			}
 		}
+
+		interface ModuleResume extends Module<'resume'>, Resume {}
+
+		// extend Module union type for better intellisense
+		type Module =
+			| ModuleResume
+			| CustomHTML
+			| Module<'hero'>
+			| Module<'hero.split'>
+			| Module<'hero.saas'>
+			| Module<'card-list'>
+			| Module<'accordion-list'>
+			| Module<'blog-list'>
+			| Module<'blog-frontpage'>
+			| Module<'blog-post-content'>
+			| Module<'breadcrumbs'>
+			| Module<'callout'>
+			| Module<'flag-list'>
+			| Module<'logo-list'>
+			| Module<'person-list'>
+			| Module<'pricing-list'>
+			| Module<'richtext-module'>
+			| Module<'schedule-module'>
+			| Module<'search-module'>
+			| Module<'stat-list'>
+			| Module<'step-list'>
+			| Module<'tabbed-content'>
+			| Module<'testimonial-list'>
+			| Module<'testimonial.featured'>
 	}
 }
 

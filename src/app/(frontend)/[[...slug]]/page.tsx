@@ -13,7 +13,8 @@ import { languages } from '@/lib/i18n'
 import errors from '@/lib/errors'
 
 export default async function Page({ params }: Props) {
-	const page = await getPage(await params)
+	const page = await getPage(await params);
+	console.log(page);
 	if (!page) notFound()
 	return <Modules modules={page.modules} page={page} />
 }

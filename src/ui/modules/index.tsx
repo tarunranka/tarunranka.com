@@ -19,6 +19,7 @@ import StepList from './StepList'
 import TabbedContent from './TabbedContent'
 import TestimonialList from './TestimonialList'
 import TestimonialFeatured from './TestimonialFeatured'
+import Resume from './Resume'
 
 import dynamic from 'next/dynamic'
 import { createDataAttribute } from 'next-sanity'
@@ -48,6 +49,7 @@ const MODULE_MAP = {
 	'tabbed-content': TabbedContent,
 	'testimonial-list': TestimonialList,
 	'testimonial.featured': TestimonialFeatured,
+	'resume': Resume,
 } as const
 
 export default function Modules({
@@ -65,17 +67,32 @@ export default function Modules({
 				return { post }
 			case 'breadcrumbs':
 				return { currentPage: post || page }
+			case 'resume':
+				return { resume: page?.resume } // or wherever you store it
 			default:
 				return {}
 		}
 	}
 
+	console.log('Modules', modules);
+	console.log('Page', page);
+	console.log('Post', post);
+	console.log('Module Map', MODULE_MAP);
+	console.log('Additional Props', getAdditionalProps);
+	console.log('Module Type', modules?.map((module) => module._type));
+	console.log('Module Key', modules?.map((module) => module._key));
+	console.log('Module', modules);
+
 	return (
 		<>
+
 			{modules?.map((module) => {
 				if (!module) return null
 
 				const Component = MODULE_MAP[module._type as keyof typeof MODULE_MAP]
+
+				console.log('Component', Component);
+
 
 				if (!Component) return null
 

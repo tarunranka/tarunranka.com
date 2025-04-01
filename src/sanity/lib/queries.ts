@@ -161,3 +161,34 @@ export async function getTranslations() {
 		}`,
 	})
 }
+
+import { sanity } from './client'
+
+export const resumeQuery = `*[_type == "resume" && language == $lang][0]{
+  name,
+  email,
+  overview,
+  experience[]{
+    role,
+    company,
+    duration,
+    technologies,
+    responsibilities
+  },
+  education[]{
+    institution,
+    degree,
+    duration,
+    details
+  },
+  technologies,
+  databases,
+  tooling
+}`
+
+export async function getResume(lang = 'en') {
+	return await fetchSanityLive<Sanity.Resume[]>({
+		query: resumeQuery,
+		params: { lang },
+	})
+}
