@@ -162,8 +162,6 @@ export async function getTranslations() {
 	})
 }
 
-import { sanity } from './client'
-
 export const resumeQuery = `*[_type == "resume" && language == $lang][0]{
   name,
   email,
