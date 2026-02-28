@@ -30,10 +30,6 @@ Rather than scattering gateway-specific code throughout the application, we buil
 
 This means the checkout flow doesn't care which gateway is being used. The routing logic selects the appropriate gateway based on the customer's country, payment method, and order value.
 
-## Fraud Detection
-
-We integrated Sift Science for real-time fraud detection. Every transaction is scored before processing, and high-risk orders are flagged for manual review. This reduced chargebacks by 40% in the first quarter after implementation.
-
 ## Lessons Learned
 
 1. **Build the abstraction first** — Don't integrate gateways directly into your checkout flow
