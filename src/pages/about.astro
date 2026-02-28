@@ -1,0 +1,64 @@
+---
+import Base from '@/layouts/Base.astro'
+import RevealOnScroll from '@/components/RevealOnScroll'
+import ExperienceCard from '@/components/ExperienceCard.astro'
+import SkillGrid from '@/components/SkillGrid.astro'
+import SectionHeader from '@/components/SectionHeader.astro'
+
+const experiences = [
+  { date: '2016 — Present', title: 'Front-End / Full Stack Developer', company: 'Sharaf DG', description: 'Core engineering member building $82M e-commerce platform serving 2.7M+ monthly visitors across 6 markets. Led Saudi Arabia market launch, integrated 6 payment gateways, architected multi-country shipping engine, and shipped 15+ major features.' },
+  { date: '2013 — 2016', title: 'Lead Engineer', company: 'Born Group', description: 'Led a team of JavaScript developers building enterprise e-commerce solutions on Hybris and Magento platforms. Restructured estimation and delivery processes.' },
+  { date: '2010 — 2013', title: 'Web Developer', company: 'EC Software India', description: 'Designed and developed web catalog applications with product search, bookmarking, and social sharing capabilities.' },
+]
+
+const skillCategories = [
+  { name: 'Languages & Frameworks', skills: ['JavaScript (ES6+)', 'TypeScript', 'React', 'Redux', 'Next.js', 'Node.js', 'Python', 'PHP', 'Laravel'] },
+  { name: 'Backend & APIs', skills: ['REST', 'GraphQL', 'Hybris', 'Magento', 'WooCommerce', 'NetSuite'] },
+  { name: 'Payments & Integrations', skills: ['Checkout.com', 'APS', 'Tabby', 'Tamara', 'STC Pay', 'Paymob', 'Sift', 'Algolia'] },
+  { name: 'Cloud & DevOps', skills: ['AWS', 'Docker', 'Vercel', 'Bitbucket Pipelines', 'CI/CD', 'ELK Stack'] },
+  { name: 'Data & Analytics', skills: ['GA4', 'Mixpanel', 'Google Merchant Center', 'Synerise'] },
+  { name: 'Testing & Tools', skills: ['Playwright', 'Git', 'Webpack', 'Gulp', 'Figma', 'JIRA'] },
+]
+---
+
+<Base title="About" description="Front-end and full-stack developer with 15+ years of experience building large-scale e-commerce platforms.">
+  <div class="py-24">
+    <section class="pb-24">
+      <div class="portfolio-section">
+        <RevealOnScroll client:visible>
+          <SectionHeader number="01" label="About" heading="Building digital experiences that scale." />
+        </RevealOnScroll>
+        <div class="space-y-5 text-ink-muted leading-relaxed">
+          <RevealOnScroll client:visible><p>I'm a front-end and full-stack developer with <strong class="text-ink font-semibold">15+ years</strong> of experience building large-scale e-commerce platforms. Currently a core engineering member at <span class="text-accent font-medium">Sharaf DG</span>, where I've built their <strong class="text-ink font-semibold">$82M e-commerce platform</strong> serving 2.7M+ monthly visitors across 6 markets in the Middle East.</p></RevealOnScroll>
+          <RevealOnScroll client:visible><p>I've led the Saudi Arabia market launch from scratch, integrated 6 payment gateways, and shipped 15+ major customer-facing features. I care about clean architecture, performance, and mentoring engineering teams.</p></RevealOnScroll>
+        </div>
+      </div>
+    </section>
+
+    <section class="py-24 border-t border-border">
+      <div class="portfolio-section">
+        <RevealOnScroll client:visible>
+          <SectionHeader number="02" label="Experience" heading="Where I've worked." />
+        </RevealOnScroll>
+        <div class="flex flex-col gap-2">
+          {experiences.map((exp, i) => (
+            <RevealOnScroll delay={i * 100} client:visible>
+              <ExperienceCard {...exp} />
+            </RevealOnScroll>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <section class="py-24 border-t border-border">
+      <div class="portfolio-section">
+        <RevealOnScroll client:visible>
+          <SectionHeader number="03" label="Skills" heading="Technologies I work with." />
+        </RevealOnScroll>
+        <RevealOnScroll client:visible>
+          <SkillGrid categories={skillCategories} />
+        </RevealOnScroll>
+      </div>
+    </section>
+  </div>
+</Base>

@@ -1,0 +1,124 @@
+---
+import { getCollection } from 'astro:content'
+import Base from '@/layouts/Base.astro'
+import RevealOnScroll from '@/components/RevealOnScroll'
+import ProjectCard from '@/components/ProjectCard.astro'
+import BlogCard from '@/components/BlogCard.astro'
+import SectionHeader from '@/components/SectionHeader.astro'
+import HexagonAvatar from '@/components/HexagonAvatar'
+
+const latestPosts = (await getCollection('blog'))
+  .sort((a, b) => b.data.date.getTime() - a.data.date.getTime())
+  .slice(0, 2)
+
+function formatDate(date: Date) {
+  return date.toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric' })
+}
+---
+
+<Base>
+  <!-- Hero -->
+  <section class="flex min-h-[calc(100vh-64px)] items-center justify-center px-6 py-20">
+    <div class="text-center max-w-[680px]">
+      <RevealOnScroll client:visible>
+        <div class="mx-auto mb-8">
+          <HexagonAvatar src="/tarun-avatar.jpg" alt="Tarun Ranka" size="lg" />
+        </div>
+      </RevealOnScroll>
+      <RevealOnScroll delay={100} client:visible>
+        <p class="font-mono text-sm text-accent tracking-wider mb-4">Hi, I'm</p>
+      </RevealOnScroll>
+      <RevealOnScroll delay={200} client:visible>
+        <h1 class="text-5xl md:text-6xl font-extrabold text-ink tracking-tight leading-tight mb-3">Tarun Ranka</h1>
+      </RevealOnScroll>
+      <RevealOnScroll delay={300} client:visible>
+        <p class="text-xl text-ink-dim mb-6">Front-End Developer &amp; Full Stack Engineer</p>
+        <p class="text-base text-ink-muted leading-relaxed max-w-[520px] mx-auto mb-10">
+          I build scalable e-commerce platforms serving millions.<br />Based in Dubai, UAE.
+        </p>
+      </RevealOnScroll>
+      <RevealOnScroll delay={400} client:visible>
+        <div class="flex gap-4 justify-center flex-wrap">
+          <a href="mailto:tarunranka.m@gmail.com" class="inline-flex items-center gap-2 px-7 py-3 bg-accent text-white text-sm font-semibold rounded-lg hover:bg-accent/90 transition-all hover:-translate-y-0.5 hover:shadow-[0_8px_30px_rgba(16,185,129,0.25)]">
+            Get in touch
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+          </a>
+          <a href="/projects" class="inline-flex items-center gap-2 px-7 py-3 text-ink-muted text-sm font-medium rounded-lg border border-border hover:border-accent hover:text-accent transition-all">
+            View my work
+          </a>
+        </div>
+      </RevealOnScroll>
+    </div>
+  </section>
+
+  <!-- Featured Projects -->
+  <section class="py-24 border-t border-border">
+    <div class="portfolio-section-wide">
+      <RevealOnScroll client:visible>
+        <SectionHeader number="01" label="Projects" heading="Things I've built." />
+      </RevealOnScroll>
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+        <RevealOnScroll delay={100} client:visible>
+          <ProjectCard icon="🛒" title="Sharaf DG E-Commerce Platform" description="$82M multi-country platform serving 2.7M+ monthly visitors across 6 markets." href="https://www.sharafdg.com" />
+        </RevealOnScroll>
+        <RevealOnScroll delay={200} client:visible>
+          <ProjectCard icon="🇸🇦" title="Saudi Arabia Market Launch" description="Full-stack build — Arabic RTL, regulatory compliance, National Address integration." />
+        </RevealOnScroll>
+        <RevealOnScroll delay={300} client:visible>
+          <ProjectCard icon="💳" title="Multi-Gateway Payment System" description="End-to-end integration of 6 payment gateways with fraud detection." />
+        </RevealOnScroll>
+        <RevealOnScroll delay={400} client:visible>
+          <ProjectCard icon="🌐" title="tarunranka.com" description="Personal portfolio built with Next.js and Tailwind CSS." href="https://tarunranka.com" />
+        </RevealOnScroll>
+      </div>
+      <div class="mt-8">
+        <a href="/projects" class="inline-flex items-center gap-2 text-sm font-medium text-accent hover:gap-3 transition-all">
+          View all projects <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Latest Blog -->
+  <section class="py-24 border-t border-border">
+    <div class="portfolio-section-wide">
+      <RevealOnScroll client:visible>
+        <SectionHeader number="02" label="Writing" heading="Latest articles." />
+      </RevealOnScroll>
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+        {latestPosts.map((post, i) => (
+          <RevealOnScroll delay={(i + 1) * 100} client:visible>
+            <BlogCard
+              title={post.data.title}
+              description={post.data.description}
+              date={formatDate(post.data.date)}
+              tag={post.data.tag}
+              readTime={post.data.readTime}
+              href={`/blog/${post.id.replace(/\.md$/, '')}`}
+            />
+          </RevealOnScroll>
+        ))}
+      </div>
+      <div class="mt-8">
+        <a href="/blog" class="inline-flex items-center gap-2 text-sm font-medium text-accent hover:gap-3 transition-all">
+          View all articles <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Contact CTA -->
+  <section class="py-28 border-t border-border text-center">
+    <div class="portfolio-section">
+      <RevealOnScroll client:visible>
+        <p class="font-mono text-sm text-accent tracking-widest uppercase mb-4">03 — Contact</p>
+        <h2 class="text-4xl md:text-5xl font-bold text-ink tracking-tight mb-4">Let's work together.</h2>
+        <p class="text-base text-ink-muted max-w-[480px] mx-auto mb-10 leading-relaxed">I'm always open to discussing new projects, creative ideas, or opportunities.</p>
+        <a href="mailto:tarunranka.m@gmail.com" class="inline-flex items-center gap-2 px-7 py-3 bg-accent text-white text-sm font-semibold rounded-lg hover:bg-accent/90 transition-all hover:-translate-y-0.5 hover:shadow-[0_8px_30px_rgba(16,185,129,0.25)]">
+          Say hello
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </a>
+      </RevealOnScroll>
+    </div>
+  </section>
+</Base>

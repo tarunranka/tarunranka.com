@@ -1,12 +1,16 @@
 @import 'tailwindcss';
-@import './fonts.css';
 
 @theme {
-	--color-canvas: #fff;
-	--color-ink: #000;
-	--color-accent: #000;
+  --color-canvas: #0f172a;
+  --color-canvas-light: #1e293b;
+  --color-ink: #e2e8f0;
+  --color-ink-muted: #94a3b8;
+  --color-ink-dim: #64748b;
+  --color-accent: #10b981;
+  --color-accent-muted: rgba(16, 185, 129, 0.15);
+  --color-border: rgba(148, 163, 184, 0.1);
 
-	--max-height-fold: calc(100svh - var(--header-height));
+  --max-height-fold: calc(100svh - var(--header-height));
 }
 
 @custom-variant hover (&:hover);
@@ -14,379 +18,121 @@
 @variant header-open (body:has(#header-toggle:checked) &);
 @variant header-closed (body:has(#header-toggle:not(:checked)) &);
 
-@variant headings (& :is(h1, h2, h3, h4, h5, h6));
-
 @layer base {
-	* {
-		min-width: 0;
-	}
+  * {
+    min-width: 0;
+  }
 
-	[hidden] {
-		display: none !important;
-	}
+  [hidden] {
+    display: none !important;
+  }
 
-	@supports (interpolate-size: allow-keywords) {
-		:root {
-			interpolate-size: allow-keywords;
-		}
+  html {
+    accent-color: var(--color-accent);
+    caret-color: var(--color-accent);
+    scroll-behavior: smooth;
+  }
 
-		:open::details-content {
-			height: auto;
-		}
-	}
+  label,
+  button,
+  summary {
+    cursor: pointer;
+  }
 
-	:target {
-		scroll-margin-top: var(--header-height);
-
-		&:is(h1, h2, h3, h4, h5, h6) {
-			animation: target 2s ease-in-out forwards;
-		}
-	}
-
-	@keyframes target {
-		0%,
-		50% {
-			background-color: color-mix(
-				in oklab,
-				var(--color-amber-400) 50%,
-				transparent
-			);
-		}
-	}
-
-	html {
-		accent-color: var(--color-accent);
-		caret-color: var(--color-accent);
-		scroll-behavior: smooth;
-	}
-
-	body:has(dialog[open]) {
-		overflow: hidden;
-	}
-
-	label,
-	input[type='submit'],
-	select,
-	button,
-	summary {
-		cursor: pointer;
-	}
-
-	input {
-		background-color: transparent;
-	}
-
-	details {
-		&::details-content {
-			overflow: clip;
-			transition-duration: var(--default-transition-duration);
-			transition-property: content-visibility, block-size;
-			transition-behavior: allow-discrete;
-		}
-
-		&:not(:open)::details-content {
-			block-size: 0;
-		}
-	}
-
-	::-webkit-details-marker {
-		display: none;
-	}
-
-	hr {
-		@apply border-ink/10;
-	}
+  ::selection {
+    background: rgba(16, 185, 129, 0.3);
+    color: var(--color-ink);
+  }
 }
 
 /* animations */
 
 @utility anim-fade {
-	--x: 0;
-	--y: 0;
-	animation: anim-fade-to var(--default-transition-duration) ease-in-out
-		forwards;
-}
-@utility anim-fade-to-l {
-	@apply anim-fade;
-	--x: 1rem;
+  --x: 0;
+  --y: 0;
+  animation: anim-fade-to var(--default-transition-duration) ease-in-out forwards;
 }
 @utility anim-fade-to-r {
-	@apply anim-fade;
-	--x: -1rem;
-}
-@utility anim-fade-to-t {
-	@apply anim-fade;
-	--y: 1rem;
-}
-@utility anim-fade-to-b {
-	@apply anim-fade;
-	--y: -1rem;
+  @apply anim-fade;
+  --x: -1rem;
 }
 
 @keyframes anim-fade-to {
-	from {
-		opacity: 0;
-		translate: var(--x, 0) var(--y, 0);
-	}
-}
-
-/* typography */
-
-@utility h-base {
-	font-weight: bold;
-}
-
-@utility h1 {
-	@apply h-base text-4xl;
-}
-@utility h2 {
-	@apply h-base text-3xl;
-}
-@utility h3 {
-	@apply h-base text-2xl;
-}
-@utility h4 {
-	@apply h-base text-xl;
-}
-@utility h5 {
-	@apply h-base text-lg;
-}
-@utility h6 {
-	@apply h-base;
-}
-
-@utility technical {
-	text-transform: uppercase;
-	letter-spacing: 1px;
-	font-weight: bold;
-}
-
-@utility text-shadow {
-	text-shadow: 0 0 0.2em rgb(0 0 0 / 0.25);
-}
-
-@utility text-gradient {
-	@apply from-accent/3 to-accent bg-linear-to-br bg-clip-text text-transparent;
-}
-
-/* ctas, links */
-
-@utility action-base {
-	display: inline-flex;
-	align-items: center;
-	justify-content: center;
-	padding: 0.5em 1em;
-	text-align: center;
-	text-shadow: none;
-	color: var(--color-ink);
-}
-
-@utility action {
-	@apply action-base bg-accent rounded border border-transparent text-balance text-white;
-}
-
-@utility action-outline {
-	@apply action-base border-accent/10 bg-canvas/50 rounded border text-balance;
-}
-
-@utility ghost {
-	@apply action-base frosted-glass hover:bg-accent/3 rounded;
-}
-
-@utility link {
-	@apply underline hover:decoration-2;
-}
-
-@utility input {
-	@apply border-ink/10 rounded border p-[.25em] text-start;
+  from {
+    opacity: 0;
+    translate: var(--x, 0) var(--y, 0);
+  }
 }
 
 /* utilities */
 
-@utility sticky-below-header {
-	position: sticky;
-	top: calc(var(--header-height) + var(--offset, 0px));
-}
-
 @utility frosted-glass {
-	--tw-bg-opacity: 0.9;
-	@apply backdrop-blur-lg backdrop-saturate-200;
+  --tw-bg-opacity: 0.85;
+  @apply backdrop-blur-lg backdrop-saturate-200;
 }
 
-@utility full-bleed {
-	width: 100vw;
-	margin-inline: calc(50% - 50vw);
+/* portfolio utilities */
+
+@utility hex-clip {
+  clip-path: polygon(50% 0%, 93% 25%, 93% 75%, 50% 100%, 7% 75%, 7% 25%);
 }
 
-@utility no-scrollbar {
-	-webkit-overflow-scrolling: touch;
-	scrollbar-width: none;
-
-	&::-webkit-scrollbar {
-		display: none;
-	}
+@utility glow-accent {
+  box-shadow: 0 0 40px rgba(16, 185, 129, 0.15), 0 0 80px rgba(16, 185, 129, 0.06);
 }
 
-@utility overflow-fade {
-	--offset: 4rem;
-	mask: linear-gradient(
-		to right,
-		transparent,
-		black var(--offset),
-		black calc(100% - var(--offset)),
-		transparent
-	);
+@utility glow-accent-hover {
+  &:hover {
+    box-shadow: 0 0 50px rgba(16, 185, 129, 0.2), 0 0 100px rgba(16, 185, 129, 0.1);
+  }
 }
 
-@utility overflow-fade-r {
-	--offset: 4rem;
-	mask: linear-gradient(
-		to right,
-		black 50%,
-		black calc(100% - var(--offset)),
-		transparent
-	);
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(32px); }
+  to { opacity: 1; transform: translateY(0); }
 }
 
-/* layout */
-
-@utility section {
-	@apply mx-auto max-w-screen-xl p-8 max-md:px-4 md:py-12;
+@utility fade-in-up {
+  animation: fadeInUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) both;
 }
 
-/* richtext */
+@utility stagger-1 { animation-delay: 0.1s; }
+@utility stagger-2 { animation-delay: 0.2s; }
+@utility stagger-3 { animation-delay: 0.3s; }
+@utility stagger-4 { animation-delay: 0.4s; }
+@utility stagger-5 { animation-delay: 0.5s; }
 
-@utility richtext {
-	@apply space-y-2 leading-relaxed;
-
-	& :is(h1, h2, h3, h4, h5, h6) strong {
-		@apply text-gradient;
-	}
-
-	& h1 {
-		@apply h1;
-	}
-
-	& h2 {
-		@apply h2;
-	}
-
-	& h3 {
-		@apply h3;
-	}
-
-	& h4 {
-		@apply h4;
-	}
-
-	& h5 {
-		@apply h5;
-	}
-
-	& h6 {
-		@apply h6;
-	}
-
-	& :is(ul, ol) {
-		list-style: revert;
-		padding-left: 1.5em;
-
-		& > li > ol {
-			list-style: lower-alpha;
-		}
-	}
-
-	& a:not(:is(.action, .action-outline, .ghost)) {
-		@apply link;
-	}
-
-	& :not(pre) > code {
-		@apply bg-ink/10 rounded px-1;
-	}
-
-	& pre {
-		tab-size: 2;
-		@apply overflow-x-auto rounded bg-transparent p-3 text-xs/relaxed;
-	}
-
-	& blockquote {
-		@apply border-accent/10 border-s-2 ps-4;
-	}
-
-	& table {
-		display: block;
-		overflow-x: auto;
-		text-wrap: balance;
-		line-height: initial;
-
-		@apply max-md:full-bleed min-w-full;
-
-		& th,
-		td {
-			@apply p-3 text-center;
-		}
-
-		& tbody {
-			& tr:nth-child(odd) {
-				@apply bg-accent/3;
-			}
-
-			& tr th:first-child {
-				text-align: left;
-			}
-		}
-	}
-
-	& video {
-		width: 100%;
-	}
+@utility portfolio-section {
+  max-width: 720px;
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 1.5rem;
+  padding-right: 1.5rem;
 }
 
-/* skeleton */
-
-@utility skeleton {
-	@apply bg-ink/3 h-[1lh];
-}
-@utility skeleton-2 {
-	@apply bg-ink/3 h-[2lh];
-}
-@utility skeleton-3 {
-	@apply bg-ink/3 h-[3lh];
+@utility portfolio-section-wide {
+  max-width: 900px;
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 1.5rem;
+  padding-right: 1.5rem;
 }
 
-/* components */
-
-@utility accordion {
-	& summary {
-		display: grid;
-		grid-template-columns: 1fr auto;
-		align-items: center;
-		gap: 1em;
-
-		&::after {
-			content: '+';
-			display: inline-block;
-			font-family: monospace;
-			font-size: 1.5em;
-		}
-	}
-
-	& ::-webkit-details-marker {
-		display: none;
-	}
-
-	&:open summary::after {
-		content: '-';
-	}
+@utility badge {
+  display: inline-block;
+  padding: 3px 12px;
+  border-radius: 9999px;
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--color-accent);
+  background: var(--color-accent-muted);
+  letter-spacing: 0.02em;
 }
 
-@utility carousel {
-	display: flex;
-	overflow-x: auto;
-	scroll-snap-type: x mandatory;
-
-	& > * {
-		flex: 0 0 min(var(--size, 300px), 80vw);
-		scroll-snap-align: center;
-	}
+@utility card-hover {
+  @apply rounded-lg border border-transparent transition-all duration-200;
+  &:hover {
+    background: var(--color-canvas-light);
+    border-color: var(--color-border);
+  }
 }

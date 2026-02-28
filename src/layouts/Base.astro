@@ -1,0 +1,93 @@
+---
+import Header from '@/components/Header'
+import Footer from '@/components/Footer.astro'
+import BottomTabBar from '@/components/BottomTabBar'
+import '@/styles/app.css'
+
+interface Props {
+  title?: string
+  description?: string
+  schema?: Record<string, unknown>
+}
+
+const pathname = Astro.url.pathname
+const baseUrl = Astro.site?.toString().replace(/\/$/, '') || 'https://tarunranka.com'
+const canonicalUrl = `${baseUrl}${pathname}`
+
+const {
+  title,
+  description = 'I build scalable e-commerce platforms serving millions. Based in Dubai, UAE.',
+  schema,
+} = Astro.props
+
+const defaultTitle = 'Tarun Ranka — Front-End Developer'
+const fullTitle = title ? `${title} | Tarun Ranka` : defaultTitle
+
+const personSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'Person',
+  name: 'Tarun Ranka',
+  url: baseUrl,
+  image: `${baseUrl}/tarun-profile.jpg`,
+  jobTitle: 'Front-End Developer',
+  worksFor: { '@type': 'Organization', name: 'Sharaf DG' },
+  address: { '@type': 'PostalAddress', addressLocality: 'Dubai', addressCountry: 'AE' },
+  sameAs: [
+    'https://github.com/tarunranka',
+    'https://linkedin.com/in/tarunranka',
+  ],
+}
+
+const websiteSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'WebSite',
+  name: 'Tarun Ranka',
+  url: baseUrl,
+  description: 'Personal portfolio and blog of Tarun Ranka, a front-end developer based in Dubai.',
+  author: { '@type': 'Person', name: 'Tarun Ranka' },
+}
+---
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{fullTitle}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonicalUrl} />
+    <meta name="robots" content="index, follow" />
+    <meta name="author" content="Tarun Ranka" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="sitemap" href="/sitemap-index.xml" />
+
+    <!-- Open Graph -->
+    <meta property="og:title" content={fullTitle} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonicalUrl} />
+    <meta property="og:site_name" content="Tarun Ranka" />
+    <meta property="og:image" content={`${baseUrl}/tarun-og.jpg`} />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:locale" content="en_US" />
+    <meta property="og:type" content="website" />
+
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={fullTitle} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={`${baseUrl}/tarun-og.jpg`} />
+
+    <!-- Schema.org -->
+    <script type="application/ld+json" set:html={JSON.stringify(personSchema)} />
+    <script type="application/ld+json" set:html={JSON.stringify(websiteSchema)} />
+    {schema && <script type="application/ld+json" set:html={JSON.stringify(schema)} />}
+  </head>
+  <body class="bg-canvas text-ink antialiased">
+    <Header pathname={pathname} client:load />
+    <main id="main-content" role="main" tabindex="-1" class="relative z-[1]">
+      <slot />
+    </main>
+    <Footer />
+    <BottomTabBar pathname={pathname} client:load />
+  </body>
+</html>

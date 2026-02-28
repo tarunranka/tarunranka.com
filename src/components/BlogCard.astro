@@ -1,0 +1,26 @@
+---
+interface Props {
+  title: string
+  description: string
+  date: string
+  tag: string
+  readTime: string
+  href: string
+}
+
+const { title, description, date, tag, readTime, href } = Astro.props
+---
+
+<a href={href} class="block group">
+  <div class="bg-canvas-light border border-border rounded-xl p-5 transition-all duration-300 group-hover:-translate-y-0.5 group-hover:border-accent/50 group-hover:bg-canvas-light/80 h-full">
+    <h3 class="text-lg font-bold text-ink group-hover:text-accent transition-colors duration-300 mb-2">{title}</h3>
+    <p class="text-ink-muted text-sm mb-4">{description}</p>
+    <div class="flex items-center justify-between gap-4 pt-3 border-t border-border/50">
+      <div class="flex items-center gap-3">
+        <span class="text-xs text-ink-dim">{date}</span>
+        <span class="text-xs font-mono px-2 py-1 rounded bg-accent/10 text-accent">{tag}</span>
+      </div>
+      <span class="text-xs font-mono text-ink-muted">{readTime}</span>
+    </div>
+  </div>
+</a>

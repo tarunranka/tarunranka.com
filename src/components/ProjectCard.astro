@@ -1,0 +1,33 @@
+---
+interface Props {
+  icon: string
+  title: string
+  description: string
+  href?: string
+}
+
+const { icon, title, description, href } = Astro.props
+---
+
+{href ? (
+  <a href={href} class="block h-full" target="_blank" rel="noopener noreferrer">
+    <div class="bg-canvas-light border border-border rounded-lg p-5 transition-all duration-300 hover:-translate-y-0.5 hover:border-accent/50 hover:bg-canvas-light/80 h-full">
+      <div class="mb-4 w-12 h-12 rounded-lg bg-accent/10 flex items-center justify-center text-2xl">{icon}</div>
+      <div class="flex items-center gap-2 mb-2">
+        <h3 class="text-lg font-bold text-ink">{title}</h3>
+        <svg class="w-4 h-4 text-ink-muted" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+        </svg>
+      </div>
+      <p class="text-ink-muted text-sm">{description}</p>
+    </div>
+  </a>
+) : (
+  <div class="bg-canvas-light border border-border rounded-lg p-5 transition-all duration-300 hover:-translate-y-0.5 hover:border-accent/50 hover:bg-canvas-light/80 h-full">
+    <div class="mb-4 w-12 h-12 rounded-lg bg-accent/10 flex items-center justify-center text-2xl">{icon}</div>
+    <div class="flex items-center gap-2 mb-2">
+      <h3 class="text-lg font-bold text-ink">{title}</h3>
+    </div>
+    <p class="text-ink-muted text-sm">{description}</p>
+  </div>
+)}

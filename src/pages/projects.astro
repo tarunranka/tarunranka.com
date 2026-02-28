@@ -1,0 +1,30 @@
+---
+import Base from '@/layouts/Base.astro'
+import RevealOnScroll from '@/components/RevealOnScroll'
+import ProjectCard from '@/components/ProjectCard.astro'
+import SectionHeader from '@/components/SectionHeader.astro'
+
+const projects = [
+  { icon: '🛒', title: 'Sharaf DG E-Commerce Platform', description: '$82M multi-country e-commerce platform serving 2.7M+ monthly visitors across UAE, Saudi Arabia, Bahrain, Egypt, and Oman.', href: 'https://www.sharafdg.com' },
+  { icon: '🇸🇦', title: 'Saudi Arabia Market Launch', description: 'Full-stack build from scratch — Arabic RTL localization, regulatory compliance, National Address integration, and Tabby payment.' },
+  { icon: '💳', title: 'Multi-Gateway Payment System', description: 'End-to-end integration of 6 payment gateways — APS, Checkout.com, Tabby, Tamara, STC Pay, and Paymob.' },
+  { icon: '🌐', title: 'tarunranka.com', description: 'Personal portfolio and blog built with Next.js and Tailwind CSS.', href: 'https://tarunranka.com' },
+]
+---
+
+<Base title="Projects" description="Featured projects and work by Tarun Ranka.">
+  <div class="py-24">
+    <div class="portfolio-section-wide">
+      <RevealOnScroll client:visible>
+        <SectionHeader number="01" label="Projects" heading="Things I've built." description="A selection of projects I've worked on over the years." />
+      </RevealOnScroll>
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+        {projects.map((project, i) => (
+          <RevealOnScroll delay={i * 100} client:visible>
+            <ProjectCard {...project} />
+          </RevealOnScroll>
+        ))}
+      </div>
+    </div>
+  </div>
+</Base>
