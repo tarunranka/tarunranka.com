@@ -56,9 +56,40 @@ tabContents.innerHTML = "";
 ### Looping Through Tabs
 
 ```javascript
-tabList.forEach(({ id, title, content }) => {
-  // Tab creation logic
-});
+function renderTabs(activeTabNum = "tab-1") {
+    tabs.innerHTML = "";
+    tabContents.innerHTML = "";
+    tabList.forEach(({ id, title, content }) => {
+        let tab = document.createElement("button");
+        tab.innerText = title;
+        tab.setAttribute("id", id);
+        tab.addEventListener("click", () => {
+            let activeTab = document.getElementById(activeTabNum);
+            let activeContent = document.getElementById(`content-${activeTabNum}`);
+            activeTab.style.backgroundColor = "white";
+            activeContent.style.display = "none";
+            activeTabNum = id;
+            tab.style.backgroundColor = "lightgray";
+            let contentDiv = document.getElementById(`content-${id}`);
+            contentDiv.style.display = "block";
+        });
+        tabs.appendChild(tab);
+
+            
+        let contentDiv= document.createElement("div");
+        contentDiv.innerText = content;
+        contentDiv.setAttribute("id", `content-${id}`);
+        contentDiv.style.display = "none";
+        if (activeTabNum === id) {
+            contentDiv.style.display = "block";
+        }
+        
+        tabContents.appendChild(contentDiv);
+    
+    })
+
+}
+renderTabs();
 ```
 
 ### Handling Clicks
