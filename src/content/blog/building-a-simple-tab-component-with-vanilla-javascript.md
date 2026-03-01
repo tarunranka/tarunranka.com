@@ -46,11 +46,11 @@ This core function performs three essential tasks:
 2. Dynamically generates tab buttons and content sections
 3. Manages click event handlers for tab switching
 
-### Clearing Containers
+### Get the DOM
 
 ```javascript
-tabs.innerHTML = "";
-tabContents.innerHTML = "";
+let tabs = document.getElementById("tabs");
+let tabContents = document.getElementById("tab-contents");
 ```
 
 ### Looping Through Tabs
