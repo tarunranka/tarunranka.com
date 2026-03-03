@@ -33,6 +33,15 @@ import RevealOnScroll from '@/components/RevealOnScroll'
           </a>
         </div>
       </RevealOnScroll>
+
+      <!-- Calendly inline widget begin -->
+      <RevealOnScroll delay={400} client:visible>
+        <div class="mt-16">
+          <div class="calendly-inline-widget" data-url="https://calendly.com/d/cvjn-sh7-ydp" style="min-width:320px;height:700px;"></div>
+        </div>
+      </RevealOnScroll>
+      <!-- Calendly inline widget end -->
     </div>
   </div>
+  <script type="text/javascript" src="https://assets.calendly.com/assets/external/widget.js" async></script>
 </Base>
